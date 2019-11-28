@@ -77,7 +77,7 @@ func Init() {
 
 	// 赋值
 	_ = config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
-	_ = config.Get(defaultRootPath, "db").Scan(&mysqlConfig)
+	_ = config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
 
 	// 标记已经初始化
 	inited = true
