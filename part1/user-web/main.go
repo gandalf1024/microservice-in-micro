@@ -7,8 +7,8 @@ import (
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/registry/etcdv3"
-	"microservice-in-micro/part1/user-web/basic"
-	"microservice-in-micro/part1/user-web/basic/config"
+	"basic"
+	"basic/config"
 	"microservice-in-micro/part1/user-web/handler"
 	"microservice-in-micro/part1/user-web/routers"
 )

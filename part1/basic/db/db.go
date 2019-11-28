@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part1/user-srv/basic/config"
+	"microservice-in-micro/part1/basic/config"
 )
 
 var (

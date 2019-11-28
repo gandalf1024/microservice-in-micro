@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part1/user-web/basic/config"
+	"microservice-in-micro/part1/basic/config"
 )
 
 func initMysql() {

@@ -21,10 +21,11 @@ var (
 	defaultConfigFilePrefix = "application-"
 	etcdConfig              defaultEtcdConfig
 	mysqlConfig             defaultMysqlConfig
+	jwtConfig               defaultJwtConfig
+	redisConfig             defaultRedisConfig
 	profiles                defaultProfiles
 	m                       sync.RWMutex
 	inited                  bool
-	sp                      = string(filepath.Separator)
 )
 
 // Init 初始化配置
@@ -39,13 +40,13 @@ func Init() {
 
 	// 加载yml配置
 	// 先加载基础配置
-	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join("."+sp, sp)))
+	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join("./", string(filepath.Separator))))
 
 	pt := filepath.Join(appPath, "conf")
 	_ = os.Chdir(appPath)
 
 	// 找到application.yml文件
-	if err = config.Load(file.NewSource(file.WithPath(pt + sp + "application.yml"))); err != nil {
+	if err = config.Load(file.NewSource(file.WithPath(pt + "/application.yml"))); err != nil {
 		panic(err)
 	}
 
@@ -54,7 +55,7 @@ func Init() {
 		panic(err)
 	}
 
-	log.Logf("[Init] 加载配置文件：path: %s, %+v\n", pt+sp+"application.yml", profiles)
+	log.Logf("[Init] 加载配置文件：path: %s, %+v\n", pt+"/application.yml", profiles)
 
 	// 开始导入新文件
 	if len(profiles.GetInclude()) > 0 {
@@ -78,6 +79,8 @@ func Init() {
 	// 赋值
 	_ = config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
 	_ = config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
+	_ = config.Get(defaultRootPath, "redis").Scan(&redisConfig)
+	_ = config.Get(defaultRootPath, "jwt").Scan(&jwtConfig)
 
 	// 标记已经初始化
 	inited = true
@@ -88,7 +91,17 @@ func GetMysqlConfig() (ret MysqlConfig) {
 	return mysqlConfig
 }
 
-// GetEtcdConfig 获取Etcd配置
+// GetConsulConfig 获取Consul配置
 func GetEtcdConfig() (ret EtcdConfig) {
 	return etcdConfig
+}
+
+// GetJwtConfig 获取Jwt配置
+func GetJwtConfig() (ret JwtConfig) {
+	return jwtConfig
+}
+
+// GetRedisConfig 获取Redis配置
+func GetRedisConfig() (ret RedisConfig) {
+	return redisConfig
 }
