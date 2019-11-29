@@ -1,10 +1,10 @@
 package db
 
 import (
+	"bac/config"
 	"database/sql"
-
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part1/basic/config"
 )
 
 func initMysql() {

@@ -1,21 +1,21 @@
 package main
 
 import (
+	"bac"
+	"bac/config"
 	"fmt"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/registry/etcdv3"
-	"basic"
-	"basic/config"
 	"microservice-in-micro/part1/user-web/handler"
 	"microservice-in-micro/part1/user-web/routers"
 )
 
 func main() {
 	// 初始化配置
-	basic.Init()
+	bac.Init()
 
 	// 使用consul注册
 	micReg := etcdv3.NewRegistry(registryOptions)

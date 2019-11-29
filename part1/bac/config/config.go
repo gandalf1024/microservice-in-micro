@@ -78,7 +78,7 @@ func Init() {
 
 	// 赋值
 	_ = config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
-	_ = config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
+	_ = config.Get(defaultRootPath, "db").Scan(&mysqlConfig)
 	_ = config.Get(defaultRootPath, "redis").Scan(&redisConfig)
 	_ = config.Get(defaultRootPath, "jwt").Scan(&jwtConfig)
 

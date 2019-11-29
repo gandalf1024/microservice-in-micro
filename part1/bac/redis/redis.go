@@ -3,9 +3,9 @@ package redis
 import (
 	"sync"
 
+	"bac/config"
 	"github.com/go-redis/redis"
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part1/basic/config"
 )
 
 var (

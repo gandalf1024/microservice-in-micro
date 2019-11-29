@@ -3,7 +3,7 @@ module microservice-in-micro/part1/user-web
 go 1.13
 
 require (
-	basic v0.0.0-00010101000000-000000000000
+	bac v0.0.0-00010101000000-000000000000
 	github.com/gin-gonic/gin v1.5.0
 	github.com/golang/protobuf v1.3.2
 	github.com/micro/cli v0.2.0
@@ -11,4 +11,4 @@ require (
 	github.com/micro/go-plugins v1.5.1
 )
 
-replace basic => ../basic
+replace bac => D:/gcode/microservice-in-micro/part1/bac

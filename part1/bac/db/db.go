@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sync"
 
+	"bac/config"
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part1/basic/config"
 )
 
 var (

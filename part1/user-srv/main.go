@@ -1,14 +1,14 @@
 package main
 
 import (
+	"bac"
+	"bac/config"
 	"fmt"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-plugins/registry/etcdv3"
-	"basic"
-	"basic/config"
 	"microservice-in-micro/part1/user-srv/handler"
 	"microservice-in-micro/part1/user-srv/model"
 	user "microservice-in-micro/part1/user-srv/proto/user"
@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// 初始化配置、数据库等信息
-	basic.Init()
+	bac.Init()
 
 	reg := etcdv3.NewRegistry(registryOptions)
 
