@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sync"
 
+	"bac/redis"
 	r "github.com/go-redis/redis"
-	"microservice-in-micro/part2/basic/redis"
 )
 
 var (

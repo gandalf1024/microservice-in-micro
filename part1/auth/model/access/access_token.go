@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
+	"bac/config"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/micro/go-micro/broker"
 	"github.com/micro/go-micro/util/log"
-	"microservice-in-micro/part2/basic/config"
 )
 
 var (

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"bac/config"
 	"github.com/dgrijalva/jwt-go"
-	"microservice-in-micro/part2/basic/config"
 )
 
 // createTokenClaims Claims
