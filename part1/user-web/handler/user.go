@@ -23,6 +23,7 @@ type Error struct {
 
 func Init() {
 	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.DefaultClient)
+	authClient = au.NewService("mu.micro.book.srv.auth", client.DefaultClient)
 }
 
 func Login(c *gin.Context) {
