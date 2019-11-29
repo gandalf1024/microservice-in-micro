@@ -10,4 +10,4 @@ require (
 	github.com/micro/go-plugins v1.5.1
 )
 
-replace bac => D:/gcode/microservice-in-micro/part1/bac
+replace bac => ../bac
