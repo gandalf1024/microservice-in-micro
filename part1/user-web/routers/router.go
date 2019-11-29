@@ -7,6 +7,7 @@ import (
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
-	router.GET("/hello", handler.Login)
+	router.GET("/login", handler.Login)
+	router.GET("/logout", handler.Logout)
 	return router
 }
