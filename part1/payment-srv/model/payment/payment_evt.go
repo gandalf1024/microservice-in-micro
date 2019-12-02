@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/micro/go-micro/util/log"
-	proto "payment_srv/proto/payment"
+	proto "microservice-in-micro/part1/payment-srv/proto/payment"
 )
 
 // sendPayDoneEvt 发送支付事件

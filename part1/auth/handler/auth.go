@@ -30,7 +30,7 @@ func (s *Service) MakeAccessToken(ctx context.Context, req *auth.Request, rsp *a
 	log.Log("[MakeAccessToken] 收到创建token请求")
 
 	token, err := accessService.MakeAccessToken(&access.Subject{
-		ID:   strconv.FormatUint(req.UserId, 10),
+		ID:   strconv.FormatInt(req.UserId, 10),
 		Name: req.UserName,
 	})
 	if err != nil {

@@ -7,8 +7,8 @@ import (
 	"bac/common"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
-	invS "inventory_srv/proto/inventory"
-	ordS "orders_srv/proto/orders"
+	invS "microservice-in-micro/part1/payment-srv/proto/inventory"
+	ordS "microservice-in-micro/part1/payment-srv/proto/orders"
 )
 
 var (

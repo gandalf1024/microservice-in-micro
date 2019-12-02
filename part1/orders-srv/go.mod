@@ -4,10 +4,6 @@ go 1.13
 
 replace bac => ../bac
 
-replace user_srv => ../user-srv
-
-replace auth => ../auth
-
 replace inventory_srv => ../inventory-srv
 
 replace payment_srv => ../payment-srv

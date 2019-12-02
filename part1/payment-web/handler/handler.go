@@ -10,7 +10,7 @@ import (
 	auth "auth/proto/auth"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/util/log"
-	payS "microservice-in-micro/part1/payment-srv/proto/payment"
+	payS "payment_srv/proto/payment"
 )
 
 var (

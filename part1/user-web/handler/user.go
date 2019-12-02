@@ -43,7 +43,7 @@ func Login(ctx *gin.Context) {
 
 	// 生成token
 	rsp2, err := authClient.MakeAccessToken(context.TODO(), &au.Request{
-		UserId:   uint64(rsp.User.Id),
+		UserId:   rsp.User.Id,
 		UserName: rsp.User.Name,
 	})
 

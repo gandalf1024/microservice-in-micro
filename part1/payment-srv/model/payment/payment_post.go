@@ -7,8 +7,8 @@ import (
 	"bac/common"
 	"bac/db"
 	"github.com/micro/go-micro/util/log"
-	invS "inventory_srv/proto/inventory"
-	ordS "orders_srv/proto/orders"
+	invS "microservice-in-micro/part1/payment-srv/proto/inventory"
+	ordS "microservice-in-micro/part1/payment-srv/proto/orders"
 )
 
 // PayOrder 支付订单
