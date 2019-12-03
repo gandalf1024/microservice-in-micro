@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"bac/common"
-	"bac/db"
 	"github.com/micro/go-micro/util/log"
 	invS "inventory_srv/proto/inventory"
+	"plugins/db"
 )
 
 // New 新增订单

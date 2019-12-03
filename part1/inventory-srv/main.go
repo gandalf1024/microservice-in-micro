@@ -2,30 +2,41 @@ package main
 
 import (
 	basic "bac"
+	"bac/common"
 	"bac/config"
 	"fmt"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
+	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
 	"microservice-in-micro/part1/inventory-srv/handler"
 	"microservice-in-micro/part1/inventory-srv/model"
 	proto "microservice-in-micro/part1/inventory-srv/proto/inventory"
 )
 
+var (
+	appName = "inv_srv"
+	cfg     = &appCfg{}
+)
+
+type appCfg struct {
+	common.AppCfg
+}
+
 func main() {
 	// 初始化配置、数据库等信息
-	basic.Init()
+	initCfg()
 
 	// 使用consul注册
 	micReg := etcdv3.NewRegistry(registryOptions)
 
 	// 新建服务
 	service := micro.NewService(
-		micro.Name("mu.micro.book.srv.inventory"),
+		micro.Name(cfg.Name),
 		micro.Registry(micReg),
-		micro.Version("latest"),
+		micro.Version(cfg.Version),
 	)
 
 	// 服务初始化
@@ -48,6 +59,29 @@ func main() {
 }
 
 func registryOptions(ops *registry.Options) {
-	etcdCfg := config.GetEtcdConfig()
-	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.GetHost(), etcdCfg.GetPort())}
+	etcdCfg := &common.Etcd{}
+	err := config.C().App("etcd", etcdCfg)
+	if err != nil {
+		panic(err)
+	}
+
+	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
+}
+
+func initCfg() {
+	source := grpc.NewSource(
+		grpc.WithAddress("127.0.0.1:9600"),
+		grpc.WithPath("micro"),
+	)
+
+	basic.Init(config.WithSource(source))
+
+	err := config.C().App(appName, cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Logf("[initCfg] 配置，cfg：%v", cfg)
+
+	return
 }

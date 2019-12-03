@@ -1,14 +1,13 @@
 package payment
 
 import (
+	"bac/common"
 	"context"
 	"fmt"
-
-	"bac/common"
-	"bac/db"
 	"github.com/micro/go-micro/util/log"
 	invS "microservice-in-micro/part1/payment-srv/proto/inventory"
 	ordS "microservice-in-micro/part1/payment-srv/proto/orders"
+	"plugins/db"
 )
 
 // PayOrder 支付订单

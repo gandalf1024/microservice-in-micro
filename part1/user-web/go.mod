@@ -18,3 +18,5 @@ replace bac => ../bac
 replace user_srv => ../user-srv
 
 replace auth => ../auth
+
+replace plugins => ../plugins

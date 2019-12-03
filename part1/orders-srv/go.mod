@@ -8,6 +8,8 @@ replace inventory_srv => ../inventory-srv
 
 replace payment_srv => ../payment-srv
 
+replace plugins => ../plugins
+
 require (
 	bac v0.0.0-00010101000000-000000000000
 	github.com/go-sql-driver/mysql v1.4.1
@@ -18,4 +20,5 @@ require (
 	github.com/micro/protoc-gen-micro v1.0.0
 	inventory_srv v0.0.0-00010101000000-000000000000
 	payment_srv v0.0.0-00010101000000-000000000000
+	plugins v0.0.0-00010101000000-000000000000
 )

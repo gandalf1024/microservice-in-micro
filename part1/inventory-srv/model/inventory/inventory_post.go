@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"bac/common"
-	"bac/db"
 	"github.com/micro/go-micro/util/log"
 	proto "microservice-in-micro/part1/inventory-srv/proto/inventory"
+	"plugins/db"
 )
 
 // Sell 销存

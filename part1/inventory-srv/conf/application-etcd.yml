@@ -1,5 +1,0 @@
-app:
-  etcd:
-    enabled: true
-    host: 192.168.59.137
-    port: 2379
