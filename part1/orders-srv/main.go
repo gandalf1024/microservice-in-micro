@@ -15,6 +15,7 @@ import (
 	"microservice-in-micro/part1/orders-srv/model"
 	proto "microservice-in-micro/part1/orders-srv/proto/orders"
 	"microservice-in-micro/part1/orders-srv/subscriber"
+	"time"
 )
 
 var (
@@ -38,6 +39,8 @@ func main() {
 		micro.Name(cfg.Name),
 		micro.Registry(micReg),
 		micro.Version(cfg.Version),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10),
 		micro.Address(cfg.Addr()),
 	)
 

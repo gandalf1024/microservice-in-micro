@@ -9,11 +9,13 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
+	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
 	"microservice-in-micro/part1/payment-srv/handler"
 	"microservice-in-micro/part1/payment-srv/model"
 	s "microservice-in-micro/part1/payment-srv/proto/payment"
+	"time"
 )
 
 var (
@@ -36,6 +38,8 @@ func main() {
 	service := micro.NewService(
 		micro.Name(cfg.Name),
 		micro.Version(cfg.Version),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10),
 		micro.Registry(micReg),
 		micro.Address(cfg.Addr()),
 	)

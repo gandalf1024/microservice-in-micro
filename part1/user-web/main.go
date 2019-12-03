@@ -5,6 +5,7 @@ import (
 	"bac/common"
 	"bac/config"
 	"fmt"
+	"github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
@@ -13,6 +14,9 @@ import (
 	"github.com/micro/go-plugins/registry/etcdv3"
 	"microservice-in-micro/part1/user-web/handler"
 	"microservice-in-micro/part1/user-web/routers"
+	"net"
+	"net/http"
+	"time"
 )
 
 var (
@@ -36,6 +40,8 @@ func main() {
 		// 后面两个web，第一个是指是web类型的服务，第二个是服务自身的名字
 		web.Name(cfg.Name),
 		web.Version(cfg.Version),
+		web.RegisterTTL(time.Second*15),
+		web.RegisterInterval(time.Second*10),
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
 	)
@@ -52,6 +58,10 @@ func main() {
 	}
 
 	service.Handle("/", routers.InitRouter())
+
+	hystrixStreamHandler := hystrix.NewStreamHandler()
+	hystrixStreamHandler.Start()
+	go http.ListenAndServe(net.JoinHostPort("", "81"), hystrixStreamHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)

@@ -3,8 +3,10 @@ package handler
 import (
 	au "auth/proto/auth"
 	"context"
+	hystrix_go "github.com/afex/hystrix-go/hystrix"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/client"
+	"github.com/micro/go-plugins/wrapper/breaker/hystrix"
 	"go.uber.org/zap"
 	"microservice-in-micro/part1/user-web/gin/err_code"
 	"microservice-in-micro/part1/user-web/gin/res"
@@ -29,8 +31,11 @@ type Error struct {
 }
 
 func Init() {
-	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.DefaultClient)
-	authClient = au.NewService("mu.micro.book.srv.auth", client.DefaultClient)
+	hystrix_go.DefaultVolumeThreshold = 1
+	hystrix_go.DefaultErrorPercentThreshold = 1
+	cl := hystrix.NewClientWrapper()(client.DefaultClient)
+	serviceClient = us.NewUserService("mu.micro.book.srv.user", cl)
+	authClient = au.NewService("mu.micro.book.srv.auth", cl)
 }
 
 func Login(ctx *gin.Context) {

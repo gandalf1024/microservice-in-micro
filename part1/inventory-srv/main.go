@@ -14,6 +14,7 @@ import (
 	"microservice-in-micro/part1/inventory-srv/handler"
 	"microservice-in-micro/part1/inventory-srv/model"
 	proto "microservice-in-micro/part1/inventory-srv/proto/inventory"
+	"time"
 )
 
 var (
@@ -37,6 +38,8 @@ func main() {
 		micro.Name(cfg.Name),
 		micro.Registry(micReg),
 		micro.Version(cfg.Version),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10),
 	)
 
 	// 服务初始化
