@@ -5,11 +5,16 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/util/log"
+	"go.uber.org/zap"
 	"microservice-in-micro/part1/user-web/gin/err_code"
 	"microservice-in-micro/part1/user-web/gin/res"
 	"net/http"
+	z "plugins/zap"
 	us "user_srv/proto/user"
+)
+
+var (
+	log = z.GetLogger()
 )
 
 var (
@@ -48,12 +53,12 @@ func Login(ctx *gin.Context) {
 	})
 
 	if err != nil {
-		log.Logf("[Login] 创建token失败，err：%s", err)
+		log.Info("[Login] 创建token失败，err：%s", zap.Any("err", err))
 		resp.Response(http.StatusInternalServerError, err_code.ERROR, err)
 		return
 	}
 
-	log.Logf("[Login] token %s", rsp2.Token)
+	log.Info("[Login] token %s", zap.Any("Token", rsp2.Token))
 	// 同时将token写到cookies中
 	ctx.Header("set-cookie", "application/json; charset=utf-8")
 	//ctx.Header("remember-me-token", rsp2.Token)
@@ -73,7 +78,7 @@ func Logout(ctx *gin.Context) {
 	resp := res.Gin{C: ctx}
 	tokenCookie, err := ctx.Cookie("remember-me-token")
 	if err != nil {
-		log.Logf("token获取失败")
+		log.Info("token获取失败")
 		resp.Response(http.StatusInternalServerError, err_code.ERROR, err)
 		return
 	}

@@ -11,4 +11,6 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/sessions v1.2.0
 	github.com/micro/go-micro v1.17.1
+	go.uber.org/zap v1.12.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )

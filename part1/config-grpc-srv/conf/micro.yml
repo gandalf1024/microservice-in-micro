@@ -3,6 +3,14 @@ micro:
     name: mu.micro.book.srv.auth
     address: 127.0.0.1
     port: 9030
+    zap:
+      level: error      #打印指定级别及以上的日志
+      development: true #是否开发模式
+      logFileDir:       #日志文件存放目录
+      outputPaths: []   #日志输出路径
+      maxSize: 50       #日志文件大小最大值
+      maxBackups: 200   #最大保存文件数
+      maxAge: 10        #最大保存天数
   etcd:
     enabled: true
     host: 192.168.59.137
