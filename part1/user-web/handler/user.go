@@ -33,7 +33,15 @@ type Error struct {
 func Init() {
 	hystrix_go.DefaultVolumeThreshold = 1
 	hystrix_go.DefaultErrorPercentThreshold = 1
-	cl := hystrix.NewClientWrapper()(client.DefaultClient)
+	cl := hystrix.NewClientWrapper()(client.DefaultClient) // 包装
+	_ = cl.Init(
+		client.Retries(3),
+		//为了调试看log方便，始终返回true, nil，即会一直重试直至重试次数用尽
+		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
+			log.Info(req.Method(), zap.Any("retryCount:", retryCount))
+			return true, nil
+		}),
+	)
 	serviceClient = us.NewUserService("mu.micro.book.srv.user", cl)
 	authClient = au.NewService("mu.micro.book.srv.auth", cl)
 }

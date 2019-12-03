@@ -10,6 +10,10 @@ require (
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.17.1
 	github.com/micro/go-plugins v1.5.1
+	go.uber.org/zap v1.12.0
+	plugins v0.0.0-00010101000000-000000000000
 )
 
 replace bac => ../bac
+
+replace plugins => ../plugins

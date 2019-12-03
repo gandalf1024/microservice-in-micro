@@ -40,8 +40,8 @@ func main() {
 		// 后面两个web，第一个是指是web类型的服务，第二个是服务自身的名字
 		web.Name(cfg.Name),
 		web.Version(cfg.Version),
-		web.RegisterTTL(time.Second*15),
-		web.RegisterInterval(time.Second*10),
+		web.RegisterTTL(time.Second*15),      //健康检查
+		web.RegisterInterval(time.Second*10), //健康检查
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
 	)
@@ -59,9 +59,11 @@ func main() {
 
 	service.Handle("/", routers.InitRouter())
 
+	//docker run --name hystrix-dashboard -d -p 8081:9002 mlabouardy/hystrix-dashboard:latest
 	hystrixStreamHandler := hystrix.NewStreamHandler()
 	hystrixStreamHandler.Start()
-	go http.ListenAndServe(net.JoinHostPort("", "81"), hystrixStreamHandler)
+	//给 192.168.59.137 容器提供数据
+	go http.ListenAndServe(net.JoinHostPort("192.168.59.137", "81"), hystrixStreamHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
