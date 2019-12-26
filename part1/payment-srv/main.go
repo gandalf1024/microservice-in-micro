@@ -9,9 +9,10 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
-	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
+	openTrace "github.com/micro/go-plugins/wrapper/trace/opentracing"
+	"github.com/opentracing/opentracing-go"
 	"microservice-in-micro/part1/payment-srv/handler"
 	"microservice-in-micro/part1/payment-srv/model"
 	s "microservice-in-micro/part1/payment-srv/proto/payment"
@@ -42,6 +43,7 @@ func main() {
 		micro.RegisterInterval(time.Second*10),
 		micro.Registry(micReg),
 		micro.Address(cfg.Addr()),
+		micro.WrapHandler(openTrace.NewHandlerWrapper(opentracing.GlobalTracer())),
 	)
 
 	// 服务初始化

@@ -10,6 +10,8 @@ import (
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
+	openTrace "github.com/micro/go-plugins/wrapper/trace/opentracing"
+	"github.com/opentracing/opentracing-go"
 	"go.uber.org/zap"
 	"microservice-in-micro/part1/auth/handler"
 	"microservice-in-micro/part1/auth/model"
@@ -43,6 +45,7 @@ func main() {
 		micro.RegisterTTL(time.Second*15),
 		micro.RegisterInterval(time.Second*10),
 		micro.Address(cfg.Addr()),
+		micro.WrapHandler(openTrace.NewHandlerWrapper(opentracing.GlobalTracer())),
 	)
 
 	// 服务初始化

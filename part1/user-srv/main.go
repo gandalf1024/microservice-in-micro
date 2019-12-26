@@ -11,6 +11,8 @@ import (
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
+	openTrace "github.com/micro/go-plugins/wrapper/trace/opentracing"
+	"github.com/opentracing/opentracing-go"
 	"microservice-in-micro/part1/user-srv/handler"
 	"microservice-in-micro/part1/user-srv/model"
 	user "microservice-in-micro/part1/user-srv/proto/user"
@@ -39,6 +41,7 @@ func main() {
 		micro.RegisterInterval(time.Second*10),
 		micro.Version(cfg.Version),
 		micro.Registry(reg),
+		micro.WrapHandler(openTrace.NewHandlerWrapper(opentracing.GlobalTracer())),
 	)
 
 	// 服务初始化

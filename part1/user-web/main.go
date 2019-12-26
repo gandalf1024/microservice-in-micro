@@ -12,10 +12,14 @@ import (
 	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/micro/go-plugins/registry/etcdv3"
+	"github.com/opentracing/opentracing-go"
 	"microservice-in-micro/part1/user-web/handler"
 	"microservice-in-micro/part1/user-web/routers"
 	"net"
 	"net/http"
+	"plugins/breaker"
+	tracer "plugins/tracer/jaeger"
+	"plugins/tracer/opentracing/std2micro"
 	"time"
 )
 
@@ -46,6 +50,13 @@ func main() {
 		web.Address(cfg.Addr()),
 	)
 
+	t, io, err := tracer.NewTracer(cfg.Name, "192.168.59.137:6831")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer io.Close()
+	opentracing.SetGlobalTracer(t)
+
 	// 初始化服务
 	if err := service.Init(
 		web.Action(
@@ -57,7 +68,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	service.Handle("/", routers.InitRouter())
+	//std2micro.TracerWrapper(breaker.BreakerWrapper(routers.InitRouter())) 添加链路追踪
+	service.Handle("/", std2micro.TracerWrapper(breaker.BreakerWrapper(routers.InitRouter())))
 
 	//docker run --name hystrix-dashboard -d -p 8081:9002 mlabouardy/hystrix-dashboard:latest
 	hystrixStreamHandler := hystrix.NewStreamHandler()
