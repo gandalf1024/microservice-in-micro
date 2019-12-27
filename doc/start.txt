@@ -23,7 +23,8 @@
 
 
 ## 融断器 hystrix UI
-http://192.168.59.137:8888/hystrix
+http://192.168.59.137:8081/hystrix
+    例: http://192.168.59.139:9981/hystrix.stream
 
 
 ## 链路追踪 Jeager UI

@@ -1,7 +1,7 @@
 micro:
   auth_srv:
     name: mu.micro.book.srv.auth
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9030
     zap:
       level: error      #打印指定级别及以上的日志
@@ -29,25 +29,25 @@ micro:
       maxOpenConnection: 130
   inv_srv:
     name: mu.micro.book.srv.inv
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9040
   jwt:
     secretKey: W6VjDud2W1kMG3BicbMNlGgI4ZfcoHtMGLWr
   orders_srv:
     name: mu.micro.book.srv.orders
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9050
   orders_web:
     name: mu.micro.book.web.orders
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9060
   payment_srv:
     name: mu.micro.book.srv.payment
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9070
   payment_web:
     name: mu.micro.book.web.payment
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9080
   redis:
     enabled: true
@@ -61,7 +61,7 @@ micro:
       nodes: 192.168.59.137:6379
   user_srv:
     name: mu.micro.book.srv.user
-    address: 127.0.0.1
+    address: 0.0.0.0
     port: 9090
   user_web:
     name: mu.micro.book.web.user
