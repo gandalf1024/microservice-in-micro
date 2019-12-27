@@ -7,6 +7,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"net/http"
 	tracer "plugins/tracer/jaeger"
+	"strconv"
 	"time"
 
 	"bac"
@@ -45,7 +46,7 @@ func main() {
 		web.Address(cfg.Addr()),
 	)
 
-	t, io, err := tracer.NewTracer(cfg.Name, "192.168.59.137:6831")
+	t, io, err := tracer.NewTracer(cfg.Name, jeagerConf())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,5 +99,15 @@ func initCfg() {
 
 	log.Logf("[initCfg] 配置，cfg：%v", cfg)
 
+	return
+}
+
+func jeagerConf() (addr string) {
+	jeagerCfg := &common.Jeager{}
+	err := config.C().App("jeager", jeagerCfg)
+	if err != nil {
+		panic(err)
+	}
+	addr = jeagerCfg.Host + ":" + strconv.Itoa(jeagerCfg.Port)
 	return
 }

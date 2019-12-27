@@ -15,6 +15,12 @@ micro:
     enabled: true
     host: 192.168.59.137
     port: 2379
+  jeager:
+    host: 192.168.59.137
+    port: 6831
+  hystrix:
+    host: 0.0.0.0  # 只能监听本机，所以host只能是 0.0.0.0  127.0.0.1
+    port: 9981 #可以自定义的本地端口
   db:
     mysql:
       enabled: true

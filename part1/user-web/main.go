@@ -20,6 +20,7 @@ import (
 	"plugins/breaker"
 	tracer "plugins/tracer/jaeger"
 	"plugins/tracer/opentracing/std2micro"
+	"strconv"
 	"time"
 )
 
@@ -50,7 +51,7 @@ func main() {
 		web.Address(cfg.Addr()),
 	)
 
-	t, io, err := tracer.NewTracer(cfg.Name, "192.168.59.137:6831")
+	t, io, err := tracer.NewTracer(cfg.Name, jeagerConf())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -76,11 +77,10 @@ func main() {
 	hystrixStreamHandler.Start()
 	//给 192.168.59.137 容器提供数据
 	go func() {
-		err := http.ListenAndServe(net.JoinHostPort("0.0.0.0", "9981"), hystrixStreamHandler)
+		addr, port := hystrixConf()
+		err := http.ListenAndServe(net.JoinHostPort(addr, port), hystrixStreamHandler)
 		if err != nil {
-			fmt.Println("1111111111--------------->>>")
-		} else {
-			fmt.Println("2222222222--------------->>>")
+			panic(err)
 		}
 	}()
 
@@ -113,5 +113,26 @@ func initCfg() {
 
 	log.Logf("[initCfg] 配置，cfg：%v", cfg)
 
+	return
+}
+
+func hystrixConf() (addr, port string) {
+	hystrixCfg := &common.Hystrix{}
+	err := config.C().App("hystrix", hystrixCfg)
+	if err != nil {
+		panic(err)
+	}
+	addr = hystrixCfg.Host
+	port = strconv.Itoa(hystrixCfg.Port)
+	return
+}
+
+func jeagerConf() (addr string) {
+	jeagerCfg := &common.Jeager{}
+	err := config.C().App("jeager", jeagerCfg)
+	if err != nil {
+		panic(err)
+	}
+	addr = jeagerCfg.Host + ":" + strconv.Itoa(jeagerCfg.Port)
 	return
 }
