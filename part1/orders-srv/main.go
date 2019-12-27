@@ -33,7 +33,7 @@ func main() {
 	// 初始化配置、数据库等信息
 	initCfg()
 
-	// 使用consul注册
+	// 使用etcd注册
 	micReg := etcdv3.NewRegistry(registryOptions)
 
 	// 新建服务
