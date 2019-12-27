@@ -26,7 +26,7 @@ const name = "API gateway"
 
 func main() {
 	stdhttp.SetSamplingFrequency(50)
-	t, io, err := tracer.NewTracer(name, "")
+	t, io, err := tracer.NewTracer(name, "192.168.59.137:6831")
 	if err != nil {
 		log.Fatal(err)
 	}

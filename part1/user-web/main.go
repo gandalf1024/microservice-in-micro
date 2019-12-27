@@ -76,7 +76,12 @@ func main() {
 	hystrixStreamHandler.Start()
 	//给 192.168.59.137 容器提供数据
 	go func() {
-		_ = http.ListenAndServe(net.JoinHostPort("192.168.59.137", "81"), hystrixStreamHandler)
+		err := http.ListenAndServe(net.JoinHostPort("", "9981"), hystrixStreamHandler)
+		if err != nil {
+			fmt.Println("1111111111--------------->>>")
+		} else {
+			fmt.Println("2222222222--------------->>>")
+		}
 	}()
 
 	if err := service.Run(); err != nil {

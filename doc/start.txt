@@ -1,0 +1,7 @@
+
+## 融断器 hystrix UI
+http://192.168.59.137:8888/hystrix
+
+
+## 链路追踪 Jeager UI
+http://192.168.59.137:16686/search

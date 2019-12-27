@@ -4,7 +4,9 @@ import (
 	"bac/common"
 	"fmt"
 	"github.com/micro/go-plugins/config/source/grpc"
+	"github.com/opentracing/opentracing-go"
 	"net/http"
+	tracer "plugins/tracer/jaeger"
 	"time"
 
 	"bac"
@@ -42,6 +44,13 @@ func main() {
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
 	)
+
+	t, io, err := tracer.NewTracer(cfg.Name, "192.168.59.137:6831")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer io.Close()
+	opentracing.SetGlobalTracer(t)
 
 	// 初始化服务
 	if err := service.Init(
