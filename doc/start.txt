@@ -1,15 +1,15 @@
 ## 架构
-    1：mysql
-    2：hystrix
-    3: Jeager
+    1: mysql
+    2: hystrix
+    3: jeager
 
 ## 使用docker启动服务
-    1：mysql
+    1: mysql
         docker pull mysql:5.7.19
         docker run -p 3306:3306 -v XXXXXXXX/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password --name mysql5719 -d f991c20cb508
-    2：hystrix
+    2: hystrix
         docker run --name hystrix-dashboard -d -p 8081:9002 mlabouardy/hystrix-dashboard:latest
-    3: Jeager
+    3: jeager
         docker run -d --name jaeger
         -e COLLECTOR_ZIPKIN_HTTP_PORT=9411
         -p 5775:5775/udp
