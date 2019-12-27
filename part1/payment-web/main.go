@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bac/common"
+	"basic/common"
 	"fmt"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"github.com/opentracing/opentracing-go"
@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"bac"
-	"bac/config"
+	"basic"
+	"basic/config"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
@@ -90,7 +90,7 @@ func initCfg() {
 		grpc.WithPath("micro"),
 	)
 
-	bac.Init(config.WithSource(source))
+	basic.Init(config.WithSource(source))
 
 	err := config.C().App(appName, cfg)
 	if err != nil {

@@ -3,7 +3,7 @@ module microservice-in-micro/part1/auth
 go 1.13
 
 require (
-	bac v0.0.0-00010101000000-000000000000
+	basic v0.0.0-00010101000000-000000000000
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis v6.15.6+incompatible
@@ -17,6 +17,6 @@ require (
 	plugins v0.0.0-00010101000000-000000000000
 )
 
-replace bac => ../bac
+replace basic => ../basic
 
 replace plugins => ../plugins

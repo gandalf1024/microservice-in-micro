@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"bac/common"
+	"basic/common"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	invS "microservice-in-micro/part1/payment-srv/proto/inventory"

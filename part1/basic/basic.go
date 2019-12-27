@@ -1,7 +1,7 @@
-package bac
+package basic
 
 import (
-	"bac/config"
+	"basic/config"
 )
 
 var (

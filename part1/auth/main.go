@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bac"
-	"bac/common"
-	"bac/config"
+	"basic"
+	"basic/common"
+	"basic/config"
 	"fmt"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
@@ -82,7 +82,7 @@ func initCfg() {
 		grpc.WithPath("micro"),
 	)
 
-	bac.Init(
+	basic.Init(
 		config.WithSource(source),
 		config.WithApp(appName),
 	)

@@ -4,7 +4,7 @@ go 1.13
 
 replace plugins => ../plugins
 
-replace bac => ../bac
+replace basic => ../basic
 
 require (
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect

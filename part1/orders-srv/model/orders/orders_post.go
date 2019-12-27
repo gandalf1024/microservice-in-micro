@@ -3,7 +3,7 @@ package orders
 import (
 	"context"
 
-	"bac/common"
+	"basic/common"
 	"github.com/micro/go-micro/util/log"
 	invS "inventory_srv/proto/inventory"
 	"plugins/db"

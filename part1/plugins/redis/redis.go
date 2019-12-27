@@ -1,11 +1,11 @@
 package redis
 
 import (
-	"bac"
+	"basic"
 	"strings"
 	"sync"
 
-	"bac/config"
+	"basic/config"
 	r "github.com/go-redis/redis"
 	"github.com/micro/go-micro/util/log"
 )
@@ -46,7 +46,7 @@ func (s *RedisSentinel) GetNodes() []string {
 
 // init 初始化Redis
 func init() {
-	bac.Register(initRedis)
+	basic.Register(initRedis)
 }
 
 func initRedis() {

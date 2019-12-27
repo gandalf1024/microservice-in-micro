@@ -2,7 +2,7 @@ module microservice-in-micro/part1/orders-srv
 
 go 1.13
 
-replace bac => ../bac
+replace basic => ../basic
 
 replace inventory_srv => ../inventory-srv
 
@@ -11,7 +11,7 @@ replace payment_srv => ../payment-srv
 replace plugins => ../plugins
 
 require (
-	bac v0.0.0-00010101000000-000000000000
+	basic v0.0.0-00010101000000-000000000000
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.2
 	github.com/micro/cli v0.2.0

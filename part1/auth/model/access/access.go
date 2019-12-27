@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"bac/config"
+	"basic/config"
 	r "github.com/go-redis/redis"
 	"github.com/micro/go-micro/util/log"
 	"plugins/jwt"

@@ -1,4 +1,4 @@
-module bac
+module basic
 
 go 1.13
 

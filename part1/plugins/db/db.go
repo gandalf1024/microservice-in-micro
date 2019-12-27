@@ -1,7 +1,7 @@
 package db
 
 import (
-	"bac"
+	"basic"
 	"database/sql"
 	"fmt"
 	"sync"
@@ -16,7 +16,7 @@ var (
 )
 
 func init() {
-	bac.Register(initDB)
+	basic.Register(initDB)
 }
 
 // initDB 初始化数据库

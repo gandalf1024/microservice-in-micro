@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bac"
-	"bac/common"
-	"bac/config"
+	"basic"
+	"basic/common"
+	"basic/config"
 	"fmt"
 	"github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/cli"
@@ -104,7 +104,7 @@ func initCfg() {
 		grpc.WithPath("micro"),
 	)
 
-	bac.Init(config.WithSource(source))
+	basic.Init(config.WithSource(source))
 
 	err := config.C().App(appName, cfg)
 	if err != nil {

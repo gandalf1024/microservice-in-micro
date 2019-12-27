@@ -1,7 +1,7 @@
 package db
 
 import (
-	"bac/config"
+	"basic/config"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/go-micro/util/log"

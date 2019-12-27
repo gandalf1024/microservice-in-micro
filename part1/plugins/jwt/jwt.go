@@ -1,6 +1,6 @@
 package jwt
 
-import "bac"
+import "basic"
 
 // Jwt 配置 接口
 type Jwt struct {
@@ -9,7 +9,7 @@ type Jwt struct {
 
 // init 初始化Redis
 func init() {
-	bac.Register(initJwt)
+	basic.Register(initJwt)
 }
 
 func initJwt() {

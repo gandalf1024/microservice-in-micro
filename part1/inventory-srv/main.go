@@ -1,9 +1,9 @@
 package main
 
 import (
-	basic "bac"
-	"bac/common"
-	"bac/config"
+	basic "basic"
+	"basic/common"
+	"basic/config"
 	"fmt"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"

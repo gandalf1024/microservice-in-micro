@@ -1,8 +1,8 @@
 package zap
 
 import (
-	"bac"
-	"bac/config"
+	"basic"
+	"basic/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -23,7 +23,7 @@ func init() {
 	l = &Logger{
 		Opts: &Options{},
 	}
-	bac.Register(initLogger)
+	basic.Register(initLogger)
 }
 
 type Logger struct {

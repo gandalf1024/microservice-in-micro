@@ -3,7 +3,7 @@ package inventory
 import (
 	"fmt"
 
-	"bac/common"
+	"basic/common"
 	"github.com/micro/go-micro/util/log"
 	proto "microservice-in-micro/part1/inventory-srv/proto/inventory"
 	"plugins/db"
