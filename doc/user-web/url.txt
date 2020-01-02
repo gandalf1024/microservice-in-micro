@@ -1,1 +1,5 @@
-http://localhost:10000/login?userName=micro
+#登录
+    http://localhost:10000/login?userName=micro
+
+#退出
+    http://localhost:10000/logout
