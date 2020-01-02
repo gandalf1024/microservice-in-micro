@@ -48,11 +48,15 @@ func Init() {
 
 func Login(ctx *gin.Context) {
 	resp := res.Gin{C: ctx}
-	uaername := ctx.Request.FormValue("userName")
+	username := ctx.Request.FormValue("userName")
+
+	if username == "" {
+		return
+	}
 
 	// 调用后台服务
 	rsp, err := serviceClient.QueryUserByName(context.TODO(), &us.Request{
-		UserName: uaername,
+		UserName: username,
 	})
 	if err != nil {
 		resp.Response(http.StatusInternalServerError, err_code.ERROR, err)
