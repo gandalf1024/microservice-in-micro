@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-plugins/config/source/grpc"
-	"github.com/micro/go-plugins/registry/etcdv3"
+	"github.com/micro/go-plugins/registry/consul"
 	openTrace "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	"github.com/opentracing/opentracing-go"
 	"go.uber.org/zap"
@@ -34,8 +34,8 @@ func main() {
 	// 初始化配置、数据库等信息
 	initCfg()
 
-	// 使用etcd注册
-	micReg := etcdv3.NewRegistry(registryOptions)
+	// 使用consul注册
+	micReg := consul.NewRegistry(registryOptions)
 
 	// 新建服务
 	service := micro.NewService(
@@ -68,14 +68,13 @@ func main() {
 }
 
 func registryOptions(ops *registry.Options) {
-	etcdCfg := &common.Etcd{}
-	err := config.C().App("etcd", etcdCfg)
+	consulCfg := &common.Consul{}
+	err := config.C().App("consul", consulCfg)
 	if err != nil {
 		panic(err)
 	}
-	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
+	ops.Addrs = []string{fmt.Sprintf("%s:%d", consulCfg.Host, consulCfg.Port)}
 }
-
 func initCfg() {
 	source := grpc.NewSource(
 		grpc.WithAddress("127.0.0.1:9600"),

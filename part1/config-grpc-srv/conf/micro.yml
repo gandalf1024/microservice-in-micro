@@ -11,10 +11,10 @@ micro:
       maxSize: 50       #日志文件大小最大值
       maxBackups: 200   #最大保存文件数
       maxAge: 10        #最大保存天数
-  etcd:
+  consul:
     enabled: true
     host: 192.168.59.137
-    port: 2379
+    port: 8500
   jeager:
     host: 192.168.59.137
     port: 6831

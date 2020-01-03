@@ -11,7 +11,7 @@ import (
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/config/source/grpc"
-	"github.com/micro/go-plugins/registry/etcdv3"
+	"github.com/micro/go-plugins/registry/consul"
 	"github.com/opentracing/opentracing-go"
 	"microservice-in-micro/part1/user-web/handler"
 	"microservice-in-micro/part1/user-web/routers"
@@ -37,8 +37,8 @@ func main() {
 	// 初始化配置
 	initCfg()
 
-	// 使用etcd注册
-	micReg := etcdv3.NewRegistry(registryOptions)
+	// 使用consul注册
+	micReg := consul.NewRegistry(registryOptions)
 
 	// 创建新服务
 	service := web.NewService(
@@ -90,12 +90,12 @@ func main() {
 }
 
 func registryOptions(ops *registry.Options) {
-	etcdCfg := &common.Etcd{}
-	err := config.C().App("etcd", etcdCfg)
+	consulCfg := &common.Consul{}
+	err := config.C().App("consul", consulCfg)
 	if err != nil {
 		panic(err)
 	}
-	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
+	ops.Addrs = []string{fmt.Sprintf("%s:%d", consulCfg.Host, consulCfg.Port)}
 }
 
 func initCfg() {
