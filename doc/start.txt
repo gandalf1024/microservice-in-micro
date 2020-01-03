@@ -1,7 +1,8 @@
 ## 架构
     1: mysql
-    2: hystrix
-    3: jeager
+    2: redis
+    3: hystrix
+    4: jeager
 
 ## 使用docker启动服务
     1: mysql
@@ -29,3 +30,6 @@ http://192.168.59.137:8081/hystrix
 
 ## 链路追踪 Jeager UI
 http://192.168.59.137:16686/search
+
+
+## 使用docker部署服务
