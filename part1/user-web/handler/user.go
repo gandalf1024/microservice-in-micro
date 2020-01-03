@@ -3,6 +3,7 @@ package handler
 import (
 	au "auth/proto/auth"
 	"context"
+	"fmt"
 	hystrix_go "github.com/afex/hystrix-go/hystrix"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/client"
@@ -38,7 +39,8 @@ func Init() {
 		client.Retries(3),
 		//为了调试看log方便，始终返回true, nil，即会一直重试直至重试次数用尽
 		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
-			log.Info(req.Method(), zap.Any("retryCount:", retryCount))
+			//log.Info(req.Method(), zap.Any("retryCount:", retryCount))
+			fmt.Println("===========================>>>", req.Method(), retryCount)
 			return true, nil
 		}),
 	)
